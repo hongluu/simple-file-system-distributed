@@ -45,3 +45,7 @@ docker exec -it hpt-client python3 client.py get test.txt
 ```
 docker exec -it hpt-client python3 client.py get test.txt
 ```
+
+## 4. Hướng phát triên tiếp
+- Thêm chức năng delete
+- Monitor trạng thái  của các data node
