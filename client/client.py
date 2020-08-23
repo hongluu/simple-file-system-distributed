@@ -27,12 +27,10 @@ def read_from_minion(block_uuid,minion):
 
 def get(master,fname):
   file_table = master.get_file_table_entry(fname)
-  print(file_table)
   if not file_table:
     LOG.info("404: file not found")
     return
 
-  LOG.info("Start get file % s" % fname)
   for block in file_table:
     for m in [master.get_minions()[_] for _ in block[1]]:
       data = read_from_minion(block[0],m)
@@ -41,7 +39,7 @@ def get(master,fname):
         break
     else:
         LOG.info("No blocks found. Possibly a corrupt file")
-  LOG.info("End get file % s" % fname)
+
 
 def put(master,source,dest):
   size = os.path.getsize(source)
