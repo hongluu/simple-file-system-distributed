@@ -32,7 +32,7 @@ docker exec -it hpt-client python3 client.py get test.txt
 ```
 - Các trường hợp kiểm tra
    - TH1: 2 container data node: hpt-slave-a, hpt-slave-a đang chạy -> Câu lệnh trên trả về nội dung '123'
-   - TH2: 2 container data node: hpt-slave-a chạy, hpt-slave-a không chạy -> Câu lệnh trên trả về nội dung '123'
+   - TH2: 2 container data node: hpt-slave-a chạy, hpt-slave-b không chạy -> Câu lệnh trên trả về nội dung '123'
    - TH3: 2 container data node: hpt-slave-a chạy, hpt-slave-a đều không chạy -> Câu lệnh trên trả về nội dung 'INFO:__main__:No blocks found. Possibly a corrupt file' (Do không có data-node nào hoạt động)
 
 ### Các câu lệnh hỗ trợ
