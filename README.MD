@@ -7,7 +7,7 @@
 Khi có hành động thêm mới file .txt hoặc thay đổi nội dung file .txt trong folder client/data chương trình sẽ tự động đồng bộ dữ liệu lên các Data Node (slave-a, slave-b)
 
 ## 2. Cài đặt
-- Cài đặt docker tại link bên dưới
+- Cài đặt docker tại link
 https://www.docker.com/get-started
 - Sau khi cài đặt xong docker lấy source code về máy 
 ```
@@ -30,9 +30,9 @@ docker ps
 ```
 docker exec -it hpt-client python3 client.py get test.txt
 ```
-- + TH1: 2 container data node: hpt-slave-a, hpt-slave-a đang chạy -> Câu lệnh trên trả về nội dung '123'
-- + TH2: 2 container data node: hpt-slave-a chạy, hpt-slave-a không chạy -> Câu lệnh trên trả về nội dung '123'
-- + TH3: 2 container data node: hpt-slave-a chạy, hpt-slave-a đều không chạy -> Câu lệnh trên trả về nội dung 'INFO:__main__:No blocks found. Possibly a corrupt file' (Do không có data-node nào hoạt động)
+  - TH1: 2 container data node: hpt-slave-a, hpt-slave-a đang chạy -> Câu lệnh trên trả về nội dung '123'
+  - TH2: 2 container data node: hpt-slave-a chạy, hpt-slave-a không chạy -> Câu lệnh trên trả về nội dung '123'
+  - TH3: 2 container data node: hpt-slave-a chạy, hpt-slave-a đều không chạy -> Câu lệnh trên trả về nội dung 'INFO:__main__:No blocks found. Possibly a corrupt file' (Do không có data-node nào hoạt động)
 
 ### Các câu lệnh hỗ trợ
 - Tắt container : `docker stop [container name]`. VD: `docer stop hpt-slave-a`
