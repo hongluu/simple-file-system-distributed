@@ -1,6 +1,7 @@
 FROM python:3.7
 RUN pip install rpyc
+RUN pip install watchdog
 WORKDIR app
-COPY client.py .
+COPY auto_sync.py .
 
-CMD python client.py
+CMD python auto_sync.py

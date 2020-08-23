@@ -3,7 +3,7 @@ import uuid
 import threading 
 import math
 import random
-import ConfigParser
+import configparser
 import signal
 import pickle
 import sys
@@ -11,12 +11,15 @@ import os
 
 from rpyc.utils.server import ThreadedServer
 
-def int_handler(signal, frame):
-  pickle.dump((MasterService.exposed_Master.file_table,MasterService.exposed_Master.block_mapping),open('fs.img','wb'))
-  sys.exit(0)
+# def dump_file_table(signal, frame):
+#   pickle.dump((MasterService.exposed_Master.file_table,MasterService.exposed_Master.block_mapping),open('fs.img','wb'))
+#   sys.exit(0)
+
+def dump_file_table():
+    pickle.dump((MasterService.exposed_Master.file_table,MasterService.exposed_Master.block_mapping),open('fs.img','wb'))
 
 def set_conf():
-  conf=ConfigParser.ConfigParser()
+  conf=configparser.ConfigParser()
   conf.readfp(open('dfs.conf'))
   MasterService.exposed_Master.block_size = int(conf.get('master','block_size'))
   MasterService.exposed_Master.replication_factor = int(conf.get('master','replication_factor'))
@@ -77,12 +80,13 @@ class MasterService(rpyc.Service):
         blocks.append((block_uuid,nodes_ids))
 
         self.__class__.file_table[dest].append((block_uuid,nodes_ids))
-
+        dump_file_table()
       return blocks
 
 
 if __name__ == "__main__":
   set_conf()
-  signal.signal(signal.SIGINT,int_handler)
   t = ThreadedServer(MasterService, port = 2131)
   t.start()
+#   signal.signal(signal.SIGINT,dump_file_table)
+#   signal.signal(signal.SIGTERM,dump_file_table)

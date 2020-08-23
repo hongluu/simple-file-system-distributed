@@ -1,0 +1,40 @@
+version: '3'
+    
+services:
+    master:
+        build: ./master
+        networks: 
+            - simple-file-system-distributed
+        container_name: hpt-master
+        volumes: 
+            - ./master:/app
+    slave-a:
+        build: ./minions
+        networks: 
+            - simple-file-system-distributed
+        container_name: hpt-slave-a
+        depends_on: 
+            - master
+        volumes: 
+            - ./minions:/app
+    slave-b:
+        build: ./minions
+        networks: 
+            - simple-file-system-distributed   
+        container_name: hpt-slave-b
+        depends_on: 
+            - master
+        volumes: 
+            - ./minions:/app
+    client:
+        build: ./client
+        networks: 
+            - simple-file-system-distributed   
+        container_name: hpt-client
+        depends_on: 
+            - master
+        volumes: 
+            - ./client:/app
+networks:
+  simple-file-system-distributed:
+    driver: bridge
